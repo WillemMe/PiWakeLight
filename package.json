@@ -1,0 +1,16 @@
+{
+  "name": "wakelight",
+  "version": "1.0.0",
+  "description": "Web interface for a raspberry pi alarm clock",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Willem Me.",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "rpi-gpio": "^0.7.0"
+  }
+}

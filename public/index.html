@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Wake light interface</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script type="text/javascript" src="beta.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <link rel="stylesheet" href="stylesheet.css">
+</head>
+<body>
+  <div id="timerblock">
+    <h1 id="timer">
+      <div id="timeBlock">
+        <span id="hour">22</span>:<span id="minute">06</span><span id="second">06</span>
+      </div>
+      <div id="dateBlock">
+        <div id="top">
+          <span id="day">Mon</span><span id="date">24</span>
+        </div>
+        <div id="bottom">
+          <span id="month">JAN</span>
+        </div>
+      </div>
+    </h1>
+  </div>
+  <div>
+    <div>
+      <div id="displayblock">
+        <div class="wrapperDisplayOne">
+          <div id="oneTimeBlock">
+            <h3>One time alarms:</h3>
+            <ul id="displayTimes"></ul>
+          </div>
+        </div>
+        <div class="wrapperDisplayTwo">
+          <div id="repTimeBlock">
+            <h3>Repeat alarms:</h3>
+            <ul id="repDisplayTimes"></ul>
+          </div>
+        </div>
+      </div>
+      <div id="timeType">
+        <section class="section">
+          <div id="checkLeft">
+            <div class="container">
+              <input type="radio" name="group1" id="radio-1">
+              <label for="radio-1"><span class="radio">For single time alarm</span></label>
+          	</div>
+          </div>
+          <div id="checkRight">
+          	<div class="container">
+              <input type="radio" name="group1" id="radio-2">
+              <label for="radio-2"><span class="radio">For repeating alarm</span></label>
+          	</div>
+          </div>
+        </section>
+      </div>
+        <div id="input">
+        <div id="inputfields">
+          <p>Date: <input min="1" max="32" type="number" id="dateIn"> Hour: <input  min="0" max="23" type="number" id="hourIn"> Minute: <input min="0" max="59" type="number" id="minuteIn"></p>
+        </div>
+        <div id="checkBox">
+          <div class="checkBoxes">
+              <input type="checkbox" id="sun" name="sun">
+              <label for="sun">Sun</label>
+              <input type="checkbox" id="mon" name="mon">
+              <label for="mon">Mon</label>
+              <input type="checkbox" id="tue" name="tue">
+              <label for="tue">Tue</label>
+              <input type="checkbox" id="wed" name="wed">
+              <label for="wed">Wed</label>
+              <input type="checkbox" id="thu" name="thu">
+              <label for="thu">Thu</label>
+              <input type="checkbox" id="fri" name="fri">
+              <label for="fri">Fri</label>
+              <input type="checkbox" id="sat" name="sat">
+              <label for="sat">Sat</label>
+          </div>
+        </div>
+        <button id="submit" type="submit" >Submit time</button><br>
+        <input type="number" id="removeIn"><button id="removeButton">Remove</button>
+      </div>
+    <div>
+      <button id="setAlarm" class="alarmOff">Set alarm</button>
+    </div>
+      <button class="onoff" id="on">On</button>
+      <button class="onoff" id="off">Off</button><br>
+  </div>
+	</body>
+</html>

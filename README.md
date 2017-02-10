@@ -1,8 +1,7 @@
 # PiWakeLight
 A Node.Js server with web interface to controll gpio pin and set an alarm on a Raspberry Pi 3 and zero (only ones I tested)
 
-## Usage
-### Setup
+## Setup
 1. Have node.js installed on the raspberry pi ([tutorial here](http://weworkweplay.com/play/raspberry-pi-nodejs/)).
 2. Clone the repo or download and extract it.
 3. Use ```npm install``` to install the needed modules for the server (```npm install``` will install the pakage.json file inside the cloned repo)
@@ -11,8 +10,8 @@ A Node.Js server with web interface to controll gpio pin and set an alarm on a R
 6. Connect it to your light (Do your research and stay safe!!)
 
 The set pin is by default on gpio28/pin 18, may add in the future way to change it.
+## Usage
 
-### Futher use
 add in the ```/etc/rc.local``` file the next command: ```node /home/pi/*PATH TO FOLDER*/main.js``` this will automaticaly run the server on boot up so you can use it with out a terminal. 
 
 To use the webpage get the IP of the pi (same as you use for ssh) past is in the browser with adding :3000 <br>

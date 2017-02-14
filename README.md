@@ -12,38 +12,41 @@ A Node.Js server with web interface to controll gpio pin and set an alarm on a R
 The set pin is by default on gpio28/pin 18, may add in the future way to change it.
 ## Usage
 
-add in the ```/etc/rc.local``` file the next command: ```node /home/pi/*PATH TO FOLDER*/main.js``` this will automaticaly run the server on boot up so you can use it with out a terminal. 
+add in the ```/etc/rc.local``` file the next command: ```node /home/pi/*PATH TO FOLDER*/main.js``` this will automaticaly run the server on boot up so you can use it without a terminal. 
 
 To use the webpage get the IP of the pi (same as you use for ssh) past is in the browser with adding :3000 <br>
 example ```192.168.1.2:3000```
 
-If the setup was successfull you will no be presented with a webpage, if not contact me and I may be able to help you out.
+If the setup was successfull you will now be presented with a webpage, if not contact me and I might able to help you out.
 
 ### Webpage usage
 * Add times
-  * Select you type of alarm (single time or repeating).
+  * Select your type of alarm (single time or repeating).
   * Fill in the forms (date is only needed for single use and the days are only used for repeating time).
   * Click submit.
 * Remove time
   * Click on the time you want to remove to remove it.
 * Set alarm
-  * To set an alarm simply click on set alarm and it turns green.
+  * To set an alarm simply click on "set alarm" and it turns green.
 * Manual switch light
   * Click on to turn the light on
   * Click off to turn the light off
   
 ### Webpage example
 
-![picture alt](http://www.willemme.com/Img/Wakelight.png "Webinterface")
+![Webpage](http://www.willemme.com/Img/Wakelight.png "Webinterface")
+
+### My hardware setup
+<img src="http://www.willemme.com/Img/Wakelight_setup.jpg" width="400" height="550" >
 
 ## Motivation
 
-This project was made because I hated it to get out of bed in the morning to switch my **light on**, so I made a Node.Js server with a page that gives you options to turn it on and also set alarm times.
+This project was made because I hated it to get out of bed in the morning and switch my light on, so I made a Node.Js server with a page that gives you options to turn it on and also set alarm times so I can stay in bed and not have to walk to the light switch.
 
 ## Need help or have a sugestion?
 
 You're free to contact me for help like
-* How to make a Node.js API with GPIO pins interface
+* How to make a Node.js API with GPIO pins interface.
 * Or want to "copy" my code and need explaination, I will help you as much as possible.
 * Or if you have a great idea tell me!
 

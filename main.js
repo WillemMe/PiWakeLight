@@ -11,18 +11,28 @@ var qs = require('qs');
 
 
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  Pin and server setup  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-// Pin setup
-gpio.setup(18, gpio.DIR_OUT, function(){
-  console.log("Pins have been setup");
-  gpio.write(18, true)
-});
 // Import json time file
 var data = fs.readFileSync(path.join(__dirname, 'TimeDB.json'));
 var dataBase = JSON.parse(data);
 var time = dataBase.time;
 var repeatTime = dataBase.repeatTime;
+var setPin = dataBase.setPin;
+var sunsetLight = dataBase.sunsetLight;
 var gpio_status = false;
-console.log(dataBase)
+
+// Pin setup
+gpio.setup(setPin, gpio.DIR_OUT, function(){
+  console.log("Pin"+setPin+" has been setup");
+  gpio.write(setPin, true)
+});
+function pinOn(){
+  gpio.write(setPin, false);
+  gpio_status = true
+}
+function pinOff(){
+  gpio.write(setPin, true);
+  gpio_status = false
+}
 // Weather setup
 var sunTime = SunCalc.getTimes(new Date(), /*Number*/ 52.21, /*Number*/ 5.7)
 // Server setup
@@ -32,7 +42,6 @@ function listening(){
   console.log("Listening on port 3000");
 }
 app.use(express.static(path.join(__dirname, 'public')));
-
 
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  Time adding and saving  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 // create application/json parser
@@ -124,17 +133,13 @@ app.get("/alarmOn", returnAlarm);
   };
 app.get("/on", lightOn);
   function lightOn(req, res){
-    gpio.write(18, false);
-    gpio_status = true
+    pinOn();
     res.send("set light to ON");
-    console.log("Light is On")
   };
 app.get("/off", lightOff);
   function lightOff(req, res){
-    gpio.write(18, true);
-    gpio_status = false
+    pinOff();
     res.send("set light to OFF");
-    console.log("Light is OFF")
   };
 app.get("/gpiostatus", gpiostatus);
   function gpiostatus(req, res){
@@ -153,76 +158,82 @@ app.get("/removeRep/:index", removeTimeRepGet);
 
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  Data base adaptations  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 // remove a time object for the time array
-  function removeTime(index){
-    time.splice(index,1);
-    console.log("removed: " + index)
-    saveDB()
-  };
-  function removeRepeatTime(index){
-    repeatTime.splice(index,1);
-    console.log("removed repeat time: " + index)
-    saveDB()
-  };
-
+function removeTime(index){
+  time.splice(index,1);
+  console.log("removed: " + index)
+  saveDB()
+};
+function removeRepeatTime(index){
+  repeatTime.splice(index,1);
+  console.log("removed repeat time: " + index)
+  saveDB()
+};
 // Saving the temp json to the timeDB.json file
-  function saveDB(){
-    var data = JSON.stringify(dataBase, null, 2);
-    fs.writeFile(path.join(__dirname, 'TimeDB.json'), data, dataSaved);
-      function dataSaved(err){
-        console.log("Data saved to timeDB.json");
-        if(err){
-          console.log(err);
-        };
+function saveDB(){
+  var data = JSON.stringify(dataBase, null, 2);
+  fs.writeFile(path.join(__dirname, 'TimeDB.json'), data, dataSaved);
+    function dataSaved(err){
+      console.log("Data saved to timeDB.json");
+      if(err){
+        console.log(err);
       };
     };
-// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  Weather  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-var sunrise = sunTime.sunrise.getHours()+ ":"+ sunTime.sunrise.getMinutes();
-console.log(sunrise)
+  };
+// / ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  Sun Timmings  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+var sunset
+function sunsetCheck(){
+  getTime()
+  sunsetHour = sunTime.sunsetStart.getHours();
+  sunsetMin = sunTime.sunsetStart.getMinutes();
+  if(sunsetHour == hour && sunsetMin == minute){
+    pinOn()
+  }
+  if(sunsetLight){
+    setTimeout(function(){sunsetCheck()}, 10000);
+  }
+}
 
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  Time checking / alarm system  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-  var date, hour, minute, second
-  // Setting of the var's and extracting time form Date object
-  function getTime(){
-    var Udate = new Date();
-    day = Udate.getDay();
-    date = Udate.getDate();
-    hour = Udate.getHours();
-    minute = Udate.getMinutes();
-    second = Udate.getSeconds();
-  };
-  function alarmCheck(){
-    getTime()
-      // Repeat time check
-      for(i=0;i<repeatTime.length;i++){
-        setHour = repeatTime[i].hour;
-        setMinute = repeatTime[i].minute;
-        setToday = (repeatTime[i].days[day] == true)
-        if((setHour == hour) && (setMinute == minute) && setToday){
-          gpio.write(18, false);
-          gpio_status = true;
-          console.log("Lamp On");
-          alarmOn = false;
-          break;
-        }
-      }
-      // Singel times list check
-      for(i=0;i<time.length;i++){
-        setDate = time[i].date;
-        setHour = time[i].hour;
-        setMinute = time[i].minute;
-      // Testing if current time = set time
-        if((setDate == date) && (setHour == hour) && (setMinute == minute)){
-          gpio.write(18, false);
-          gpio_status = true;
-          console.log("Lamp On");
-          alarmOn = false;
-          removeTime(i);
-          break;
-        }
-      }
-    // Restart the function aslong as the alarm hasn't been triggerd
-    if(alarmOn){
-      setTimeout(function(){alarmCheck()}, 10000);
+var date, hour, minute, second
+// Setting of the var's and extracting time form Date object
+function getTime(){
+  var Udate = new Date();
+  day = Udate.getDay();
+  date = Udate.getDate();
+  hour = Udate.getHours();
+  minute = Udate.getMinutes();
+  second = Udate.getSeconds();
+};
+function alarmCheck(){
+  getTime()
+  // Repeat time check
+  for(i=0;i<repeatTime.length;i++){
+    setHour = repeatTime[i].hour;
+    setMinute = repeatTime[i].minute;
+    setToday = (repeatTime[i].days[day] == true);
+    if((setHour == hour) && (setMinute == minute) && setToday){
+      pinOn();
+      alarmOn = false;
+      break;
     }
-  };
-  alarmCheck();
+  }
+  // Singel times list check
+  for(i=0;i<time.length;i++){
+    setDate = time[i].date;
+    setHour = time[i].hour;
+    setMinute = time[i].minute;
+  // Testing if current time = set time
+    if((setDate == date) && (setHour == hour) && (setMinute == minute)){
+      pinOn();
+      alarmOn = false;
+      removeTime(i);
+      break;
+    }
+  }
+// Restart the function aslong as the alarm hasn't been triggerd
+  if(alarmOn){
+    setTimeout(function(){alarmCheck()}, 10000);
+  }
+};
+alarmCheck();
+sunsetCheck();

@@ -6,10 +6,9 @@ A Node.Js server with web interface to controll gpio pin and set an alarm on a R
 2. Clone the repo or download and extract it.
 3. Use ```npm install``` to install the needed modules for the server (```npm install``` will install the pakage.json file inside the cloned repo)
 4. To run the server use ```sudo node main.js``` sudo is important because otherwise the gpio module will crash 
-5. Hook up the relay to the appropriate gpio pins, data to gpio28/pin 18.
+5. Hook up the relay to the appropriate gpio pins, data to gpio28/pin 18 (can be changed in the future).
 6. Connect it to your light (Do your research and stay safe!!)
 
-The set pin is by default on gpio28/pin 18, may add in the future way to change it.
 ## Usage
 
 add in the ```/etc/rc.local``` file the next command: ```node /home/pi/*PATH TO FOLDER*/main.js``` this will automaticaly run the server on boot up so you can use it without a terminal. 

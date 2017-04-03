@@ -8,13 +8,64 @@
         false,
         false,
         true,
+        false,
+        false
+      ],
+      "hour": 7,
+      "minute": 0
+    },
+    {
+      "days": [
+        false,
+        false,
+        false,
+        false,
+        false,
         true,
         false
       ],
-      "hour": 9,
-      "minute": 45
+      "hour": 7,
+      "minute": 0
+    },
+    {
+      "days": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "hour": 7,
+      "minute": 0
+    },
+    {
+      "days": [
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false
+      ],
+      "hour": 7,
+      "minute": 30
+    },
+    {
+      "days": [
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false
+      ],
+      "hour": 8,
+      "minute": 30
     }
   ],
-  "setPin": 18,
-  "sunsetLight": true
+  "setPin": 18
 }

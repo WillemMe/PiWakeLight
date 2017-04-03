@@ -1,9 +1,8 @@
-// Input vars!!
+// Input vars
 var alarmOn = true;
 // Node require
 var gpio = require('rpi-gpio');
 var express = require('express');
-var SunCalc = require('suncalc');
 var bodyParser = require('body-parser');
 var fs = require('fs');
 var path = require('path');
@@ -14,10 +13,12 @@ var qs = require('qs');
 // Import json time file
 var data = fs.readFileSync(path.join(__dirname, 'TimeDB.json'));
 var dataBase = JSON.parse(data);
-var time = dataBase.time;
+var time = dataBase.time
 var repeatTime = dataBase.repeatTime;
 var setPin = dataBase.setPin;
 var sunsetLight = dataBase.sunsetLight;
+var silenceHours = dataBase.silenceHours;
+var silenceHoursHour = dataBase.silenceHoursHour;
 var gpio_status = false;
 
 // Pin setup
@@ -33,8 +34,6 @@ function pinOff(){
   gpio.write(setPin, true);
   gpio_status = false
 }
-// Weather setup
-var sunTime = SunCalc.getTimes(new Date(), /*Number*/ 52.21, /*Number*/ 5.7)
 // Server setup
 var app = express();
 var server = app.listen(3000, listening);
@@ -179,20 +178,6 @@ function saveDB(){
       };
     };
   };
-// / ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  Sun Timmings  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-var sunset
-function sunsetCheck(){
-  getTime()
-  sunsetHour = sunTime.sunsetStart.getHours();
-  sunsetMin = sunTime.sunsetStart.getMinutes();
-  if(sunsetHour == hour && sunsetMin == minute){
-    pinOn()
-  }
-  if(sunsetLight){
-    setTimeout(function(){sunsetCheck()}, 10000);
-  }
-}
-
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  Time checking / alarm system  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 var date, hour, minute, second
 // Setting of the var's and extracting time form Date object

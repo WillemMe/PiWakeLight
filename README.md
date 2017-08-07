@@ -35,9 +35,6 @@ If the setup was successfull you will now be presented with a webpage, if not co
 
 ![Webpage](http://www.willemme.com/Img/Wakelight.png "Webinterface")
 
-### My hardware setup
-<img src="http://www.willemme.com/Img/Wakelight_setup.jpg" width="400" height="550" >
-
 ## Motivation
 
 This project was made because I hated it to get out of bed in the morning and switch my light on, so I made a Node.Js server with a page that gives you options to turn it on and also set alarm times so I can stay in bed and not have to walk to the light switch.

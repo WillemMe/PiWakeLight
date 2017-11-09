@@ -1,0 +1,65 @@
+{
+  "time": [
+    {
+      "date": 24,
+      "hour": 6,
+      "minute": 30
+    }
+  ],
+  "repeatTime": [
+    {
+      "days": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false
+      ],
+      "hour": 7,
+      "minute": 0
+    },
+    {
+      "days": [
+        false,
+        false,
+        false,
+        true,
+        true,
+        true,
+        false
+      ],
+      "hour": 7,
+      "minute": 0
+    },
+    {
+      "days": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "hour": 7,
+      "minute": 45
+    },
+    {
+      "days": [
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false
+      ],
+      "hour": 8,
+      "minute": 30
+    }
+  ],
+  "setPin": 18,
+  "setPinButton": 7
+}

@@ -23,7 +23,7 @@ If the setup was successfull you will now be presented with a webpage, if not co
 ### Webpage usage
 * Add times
   * Fill in the forms
-    * Fill in the date form or select days(choose date or days not both!)
+   * Fill in the date form or select days(choose date or days not both!)
   * Click submit.
 * Remove time
   * Click on the time you want to remove to remove it.
@@ -38,7 +38,7 @@ If the setup was successfull you will now be presented with a webpage, if not co
 ![Webpage](http://www.willemme.com/Img/Wakelight.png "Webinterface")
 
 ### My hardware setup
-<img src="https://i.imgur.com/Pu6L6pn.jpg" width="1000" height="562.5" >
+<img src="https://i.imgur.com/Pu6L6pn.jpg?1" width="1000" height="562.5" style="-ms-transform: rotate(90deg); -webkit-transform: rotate(90deg); transform: rotate(90deg);" >
 
 ## Motivation
 

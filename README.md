@@ -1,6 +1,17 @@
 # PiWakeLight
 A Node.Js server with web interface to controll gpio pin and set an alarm on a Raspberry Pi 3 and zero (only ones I tested)
 
+## Motivation
+
+This project was made because I hated it to get out of bed in the morning and switch my light on, so I made a Node.Js server with a page that gives you options to turn it on and also set alarm times so I can stay in bed and not have to walk to the light switch.
+
+### Learning goals:
+* Making and using an API 
+* Node.Js
+* Express framework
+* Raspberry Pi as server
+
+
 ## Setup
 1. Have node.js installed on the raspberry pi ([tutorial here](http://weworkweplay.com/play/raspberry-pi-nodejs/)).
 2. Clone the repo or download and extract it.
@@ -40,9 +51,6 @@ If the setup was successfull you will now be presented with a webpage, if not co
 ### My hardware setup
 <img src="https://i.imgur.com/Pu6L6pn.jpg?1" width="1000" height="562.5" style="-ms-transform: rotate(90deg); -webkit-transform: rotate(90deg); transform: rotate(90deg);" >
 
-## Motivation
-
-This project was made because I hated it to get out of bed in the morning and switch my light on, so I made a Node.Js server with a page that gives you options to turn it on and also set alarm times so I can stay in bed and not have to walk to the light switch.
 
 ## Need help or have a sugestion?
 
